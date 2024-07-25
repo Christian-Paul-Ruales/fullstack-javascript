@@ -1,8 +1,12 @@
 "use strict";
-const msg = 'Hello world!!';
-const hero = {
-    name: 'IronMan',
-    age: 45
-};
-hero.age = 60;
-console.log(hero.age);
+// funcion anonima autoinvocada
+(() => {
+    const a = 10; // a es 10 (constante no se puede cambiar)
+    console.log(a);
+})();
+//siempre explicar el tipo de dato
+function sayHello(msg) {
+    console.log(msg);
+}
+// es recomendable siempre se debe poner el tipo de dato
+// evitar el any (cualquier tipo de dato)
