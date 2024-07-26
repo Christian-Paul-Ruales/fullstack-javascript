@@ -1,4 +1,4 @@
-{
+{ /** mayores parametros https://www.typescriptlang.org/docs/handbook/tsconfig-json.html*/
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
