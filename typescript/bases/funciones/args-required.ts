@@ -1,0 +1,17 @@
+
+(
+    () => {
+        const fullName = (firstname: string, lastname: string): string => {
+            // validacion unicamente para undefined
+            if( !firstname ){
+                throw new Error('firstname required');
+            }
+
+            return `${firstname} ${lastname}`;
+        }
+
+        const name = fullName('Tony', 'Stark');
+    
+        console.log({ name });
+    }   
+)()
