@@ -22,3 +22,23 @@ con tsc y el archivo tsconfig, typescript compila los multiples archivos
 # watch mode, modo observador
 tsc --watch
 tsc -w
+
+# sourceMap true en tsconfig.json
+permite trackear los errores(lineas de error) en el archivo de typescript y no en el traspilado de javascript
+
+# removeComments en tsconfig.json
+remueve comentarios // o /***/ en el archivo traspilado de javascript
+
+# exclude en tsconfig
+al final del archivo podemos expresar que archivos o carpetas deseamos excluir del proceso del traspilado
+
+ ,
+  "exclude":[
+    "objetos/*.ts"
+  ]
+exactamente lo mismo para incluir con la palabra include
+
+ ,
+  "include":[
+    "objetos/*.ts"
+  ]

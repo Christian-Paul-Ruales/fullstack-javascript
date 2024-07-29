@@ -1,8 +1,5 @@
 "use strict";
 (() => {
-    /**
-     * objeto literal en javascript
-    */
     let flash = {
         name: 'Barry alien',
         age: 25,
@@ -17,3 +14,4 @@
     };
     console.log(flash);
 })();
+//# sourceMappingURL=objects.js.map

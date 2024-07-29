@@ -6,6 +6,6 @@
     const BlackVolcan = `Hero: Black Volcan`;
     console.log(`I'm ${batman}`);
     console.log(batman.toUpperCase());
-    // ? es null chek
     console.log(((_a = batman[10]) === null || _a === void 0 ? void 0 : _a.toUpperCase()) || 'nu ahi 10');
 })();
+//# sourceMappingURL=strings.js.map

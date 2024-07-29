@@ -9,7 +9,7 @@
     else {
         console.log('We are ok');
     }
-    // nan es considerado un numero en javascript
     avengers = Number('55A');
     console.log({ avengers });
 })();
+//# sourceMappingURL=numbers.js.map

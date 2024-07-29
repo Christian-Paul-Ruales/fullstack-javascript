@@ -7,8 +7,7 @@
     let exampleF;
     let functionNumber;
     let functionString;
-    let soloReturnString; // puede ser void tambien
-    //myFunction = 10;
+    let soloReturnString;
     myFunction = addNumber;
     console.log(myFunction(1, 2));
     myFunction = greet;
@@ -16,3 +15,4 @@
     myFunction = saveTheWorld;
     console.log(myFunction());
 })();
+//# sourceMappingURL=function-type.js.map

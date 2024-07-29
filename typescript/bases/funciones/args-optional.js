@@ -1,7 +1,6 @@
 "use strict";
 (() => {
     const fullName = (firstname, lastname) => {
-        // validacion unicamente para undefined
         if (!firstname) {
             throw new Error('firstname required');
         }
@@ -10,3 +9,4 @@
     const name = fullName('Tony');
     console.log({ name });
 })();
+//# sourceMappingURL=args-optional.js.map

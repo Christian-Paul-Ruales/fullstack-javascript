@@ -1,5 +1,4 @@
 "use strict";
-// funcion anonima autoinvocada
 (() => {
     const hero = 'Flash';
     function returnName() {
@@ -11,3 +10,4 @@
     console.log(typeof activeBatisignal());
     const heroName = returnName();
 })();
+//# sourceMappingURL=functions.js.map

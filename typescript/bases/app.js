@@ -1,12 +1,9 @@
 "use strict";
-// funcion anonima autoinvocada
 (() => {
-    const a = 10; // a es 10 (constante no se puede cambiar)
+    const a = 10;
     console.log(a);
 })();
-//siempre explicar el tipo de dato
 function sayHello(msg) {
     console.log(msg);
 }
-// es recomendable siempre se debe poner el tipo de dato
-// evitar el any (cualquier tipo de dato)
+//# sourceMappingURL=app.js.map
