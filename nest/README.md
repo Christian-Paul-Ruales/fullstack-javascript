@@ -20,3 +20,20 @@ npm create vite
 npm install
 npm run dev
 
+# NEST
+es un marco de trabajo dogmatico
+
+permite crear apps del lado del servidor con node.js
+
+por defecto usa typescript, es recomendable trabajar con este
+
+Nest esta fuertemente inspirado en angular
+**RECOMENDADO VER EL PDF DE ATAJOS, PARA VER LOS COMANDOS**
+
+## Instalacion
+instalamos de manera global
+    *npm i -g @nestjs/cli*
+
+## Crear un proyecto
+
+
