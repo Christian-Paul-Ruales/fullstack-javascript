@@ -82,6 +82,7 @@ ejemplo en ../api/pokeApi.adapters
 
 ## Decoradores
 Funcion que tienen acceso a la definicion de donde se use, sea clase, metodo entre otros
+
 se definen con @NombreDecorador y existen para metodos,clases etc etc
 
 **se recomienda ir al archivo tsconfig.json**

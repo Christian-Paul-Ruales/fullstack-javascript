@@ -44,5 +44,6 @@ export class Pokemon {
 }
 
 export const charmander = new Pokemon(1, '2sad');
+
 charmander.speak();
 charmander.scream();
