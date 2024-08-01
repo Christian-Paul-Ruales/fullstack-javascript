@@ -32,6 +32,7 @@ Nest esta fuertemente inspirado en angular
 
 ## Instalacion
 instalamos de manera global
+
     *npm i -g @nestjs/cli*
 
 ## Crear un proyecto
