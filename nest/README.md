@@ -12,13 +12,17 @@ https://gist.github.com/Klerith/c0ef4f48d986e2cf3308bb54fff84ea5
 seleccionar vanilla y vanilla typescript
 
 despues en la carpeta del proyecto mandamos un 
-*yarn install*
-ejecutamos con *yarn dev*
+
+    yarn install
+
+ejecutamos con 
+
+    yarn dev
 
 ## VITE con npm
-npm create vite
-npm install
-npm run dev
+* npm create vite
+* npm install
+* npm run dev
 
 # NEST
 es un marco de trabajo dogmatico
@@ -33,8 +37,10 @@ Nest esta fuertemente inspirado en angular
 ## Instalacion
 instalamos de manera global
 
-    *npm i -g @nestjs/cli*
+    npm i -g @nestjs/cli
 
 ## Crear un proyecto
 
+    nest new project-name
 
+despues podemos usar el manejador de paquetes que deseamos, en este caso se recomienda usar **yarn**

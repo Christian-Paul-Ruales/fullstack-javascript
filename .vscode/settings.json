@@ -1,3 +1,6 @@
 {
- "material-icon-theme.activeIconPack": "nest",   
+"material-icon-theme.activeIconPack": "nest",
+"editor.detectIndentation": false,
+"editor.tabSize": 2,
+
 }
