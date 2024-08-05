@@ -60,3 +60,68 @@ Maneja los errores de codigo en mensajes de respuesta http
 
 throw new etc etc
 
+## UUID 
+IDs unicas, para generarlo es necesario instalar el paquete uuid
+```bash
+yarn add uuid
+```
+para instalar los tipos se debe hacer en modo desarrollo con el -D
+```bash
+yarn add -D @types/uuid
+```
+
+## modificacion de pipes
+se puede instanciar los pipes, enviando un objeto con las modificaciones
+
+```bash
+getCarById(@Param('id',new ParseUUIDPipe({version: '4'})
+```
+
+## DTO (Data Transfer Object)
+Objeto de transferencia de datos
+```bash
+export class CreateCarDto {
+  readonly brand: string;
+  readonly model: string;
+}
+```
+
+## Class validator y Class transformer
+Instalar 
+```bash
+yarn add class-validator class-transformer
+```
+
+En el controlador aprender a usar **a nivel de controlador**
+```bash
+@UsePipes(ValidationPipe)
+``` 
+
+Tambien lo puedes hacer a nivel globaL en main **ES LO MAS RECOMENDADO**
+
+```bash
+app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true /** solo deja la data que espera*/,
+      forbidNonWhitelisted: true /** no permite ingresar data no esperada*/,
+    }),
+  );
+``` 
+
+## Decoradores en dto
+```bash
+  @IsString()
+  @IsUUID()
+  @IsOptional()
+  readonly id?: string;
+  @IsString({ message: `the brand is required` })
+  @IsOptional()
+  readonly brand?: string;
+
+  @IsString()
+  @IsOptional()
+  readonly model?: string;
+```
+
+## Archivo de exportacion
+un index en las carpetas, exportando los archivos
