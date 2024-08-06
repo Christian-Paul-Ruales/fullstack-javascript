@@ -92,3 +92,15 @@ Populate DB
 ```
 http://localhost:3000/seed
 ```
+
+## DESPLEGAR EN PRODUCCION
+
+**Construimos**
+```bash
+yarn build
+```
+
+**ejecutamos**
+```bash
+yarn start:prod
+```
