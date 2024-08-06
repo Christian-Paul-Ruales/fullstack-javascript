@@ -125,3 +125,54 @@ app.useGlobalPipes(
 
 ## Archivo de exportacion
 un index en las carpetas, exportando los archivos
+
+luego importamos las carpeta
+
+# Resource
+Genera todos los recursos
+```bash
+nest g res brands
+```
+o sin archivo de pruebas
+```bash
+nest g res brands --no-spec
+```
+
+1. REST API
+2. CRUD ENTRY POINTS (Y) 
+
+## DTOs extends PartialType(CreateBlaDto)
+hace que todas las propiedades sean opcionales 
+
+## SEED semillas de desarrollo
+```bash
+nest g res seed --no-spec
+```
+1. borrar dtos y entities (no se van a ocupar)
+2. En el controller dejamos solo el metodo @Get y lo renombramos runSeed
+3. Creamos los seeds.seed.ts en una carpeta dentro del recurso seed
+4. exportamos el arreglo de datos
+5. Crear metodos en los services que necesitamos setear los arrays
+```bash
+fillBrandsWithSeedData(brands: Brand[]) {
+  this.brands = brands;
+}
+```
+## Inyectar servicios en otros servicios, (continuamos con el proceso anterior)
+6. Exportamos desde el modulo el servicio que deseamos
+```bash
+@Module({
+  controllers: [CarsController],
+  providers: [CarsService],
+  exports: [CarsService], // exportamos en modulos
+})
+```
+7. Importamos en el modulo Seed. el modulo que deseamos importar
+```bash
+@Module({
+  controllers: [SeedController],
+  providers: [SeedService],
+  imports: [CarsModule],
+})
+```
+

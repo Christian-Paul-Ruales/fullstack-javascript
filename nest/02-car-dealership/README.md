@@ -80,3 +80,15 @@ yarn start:dev
 * node_modules: dependencias descargadas
 * src: carpeta de codigo del prouecto
 * test: archivos de prueba
+
+## si el prettier molesta 
+recomendado hacer un yarn remove a **prettier** y a otras libs como
+
+eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier"
+
+# Car Dealship 
+Populate DB
+```
+http://localhost:3000/seed
+```
