@@ -184,3 +184,42 @@ yarn add axios
 ```bash
 yarn add axios@0.27.2 o npm install axios@0.27.2.
 ```
+
+5. en el metodo en seedService, agregamos una insercion masiva
+***el borrado masivo elimina todos los datos de la tabla***
+```javascript
+async executeSeed() {
+    /**
+     * Delete * from pokemons
+     * NO RECOMENDADO: ESTO BORRA TODOS LOS DATOS DE LA TABLA, SOLO EN PRUEBAS
+     */
+    await this.pokemonModel.deleteMany({});
+
+    const { data } = await this.axios.get<PokeResponse>('https://pokeapi.co/api/v2/pokemon?limit=650');
+    
+    const pokemonToInsert: {name: string; no: number}[] = [];
+
+    data.results.forEach(
+      async({name, url}) => {
+        const segments = url.split('/');
+        const no = +segments[segments.length -2];
+        
+        pokemonToInsert.push({name, no});
+      }
+    );
+
+    await this.pokemonModel.insertMany(pokemonToInsert);
+ 
+    return `Seed executed succesfully`;
+  }
+
+```
+
+6. para insertar nos vamos al metodo seed
+```
+http://localhost:3000/api/v2/seed
+```
+
+
+## Mejor manera de cameiar
+Usar un adaptador con su respectiva interfaz, tal cual como common/adapters/httpAdapter

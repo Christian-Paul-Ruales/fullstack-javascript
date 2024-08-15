@@ -8,6 +8,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true, // solo deja la data que se espera
     forbidNonWhitelisted: true, //no permite ingresar data no esperada
+    transform: true, // transforma la data que transfiere desde los dtos
+    transformOptions: {
+      enableImplicitConversion: true
+    }
   }));
   await app.listen(3000);
 }
