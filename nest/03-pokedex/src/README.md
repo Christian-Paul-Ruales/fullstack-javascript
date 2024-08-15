@@ -164,3 +164,23 @@ transform(value: string, metadata: ArgumentMetadata) {
     return value.toUpperCase();
   }
 ```
+
+## SEED
+
+1. Generamos el resource seed
+```bash
+nest g res seed --no-spec
+```
+2. eliminamos los dtos y entities
+3. dejamos solo un metodo get en el controller y un metodo en el service
+
+4. Instalaremos axios, 
+```bash
+yarn add axios
+```
+
+**si el mismo genera un problema instalar la version menor**
+
+```bash
+yarn add axios@0.27.2 o npm install axios@0.27.2.
+```
