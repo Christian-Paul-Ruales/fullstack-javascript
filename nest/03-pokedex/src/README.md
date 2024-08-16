@@ -223,3 +223,156 @@ http://localhost:3000/api/v2/seed
 
 ## Mejor manera de cameiar
 Usar un adaptador con su respectiva interfaz, tal cual como common/adapters/httpAdapter
+
+## variables de entorno
+1. crear el archivo .env en la raiz del proyecto
+
+2. agregar las variables de entorno
+```properties
+MONGODB=mongodb://localhost/nest-pokemon
+PORT=3001
+```
+
+3. instalar paquete
+```bash
+yarn add @nestjs/config
+```
+
+3. En el app.module.ts importar en primera ubicacion 
+```javascript
+ConfigModule.forRoot()
+```
+4. REARRANCAR LA APP
+5. Usar  las variables de entorno desde procces.env.VARIABLE_ENTORNO
+```javascript
+    MongooseModule.forRoot(process.env.MONGODB), // conexion con base de datos mongo
+```
+
+**a veces es necesario reiniciar la ejecucion de la app**
+
+## Para evitar problemas con acualizaciones
+1. crear una carpeta config en la carpeta src
+2. crear un archivo app.config.ts, tambien llamado env.config.ts en algunos casos
+3. realizar la configuracion de variables en una funcion flecha
+```javascript
+export const EnvConfigurarion = () => 
+  ({
+    environment: process.env.NODE_ENV || 'dev',
+    mongodb: process.env.MONGODB,
+    port: process.env.PORT || 3002,
+    defaultLimit: process.env.DEFAULT_LIMIT || 10,
+  })
+  
+```
+4. en el app.module.ts configuramos el config module root app, en load el archivo donde se encuentra la funcion
+```javascript
+imports: [
+    ConfigModule.forRoot(
+      {
+        load: [EnvConfigurarion],
+      }
+    ), // debe ir primero
+  
+```
+
+5. Importar config module en el pokemon module
+```javascript
+ imports:[
+    ConfigModule,
+```
+
+6. Inyectar el servicio de configserver en el service que desea usar
+```javascript
+constructor(
+    @InjectModel(Pokemon.name)
+    private readonly pokemonModel: Model<Pokemon>,
+    private readonly configService: ConfigService,
+  ){
+
+```
+7. Ahora podemos usarlo en nuestro service, mediante el metodo get<TipoDato>
+**La variable default limit fue inicializada como atributo private**
+```javascript
+this.defaultLimit = this.configService.get<number>('defaultLimit');
+```
+
+**NOTA:** config server esta fuera del alcance de main
+
+## joi 
+no usar happy joi, solo joi
+1. instalar joi
+```bash
+yarn add joi
+```
+2. crear el archivo joi.validation.ts en la carpeta config
+realizar la importacion en ese archivo de esta manera
+
+```javascript
+import * as Joi from 'joi';
+```  
+3. Realizar las validaciones como se muestra a continuacion
+```javascript
+import * as Joi from 'joi';
+
+// validamos las variables de entorno
+export const JoiValidationSchema = Joi.object(
+  {
+    MONGODB: Joi.required(),
+    PORT: Joi.number().default(3005),
+    DAFAULT_LIMIT: Joi.number().default(6),
+  }
+);
+``` 
+
+4. en el appmodule, agregar el JoiValidationSchema como validationSchema
+
+```javascript
+  imports: [
+    ConfigModule.forRoot(
+      {
+        load: [EnvConfigurarion],
+        validationSchema: JoiValidationSchema,
+      }
+```
+**primero se ejecuta el esquema de validacion, despues el siguiente, los valores se generan con string**
+
+5. en el environment configuration (app.config.ts), validar el tipo de datos
+
+notese el + en la propiedad defaultLimit
+```javascript
+export const EnvConfigurarion = () => 
+  ({
+    environment: process.env.NODE_ENV || 'dev',
+    mongodb: process.env.MONGODB,
+    port: process.env.PORT || 3002,
+    defaultLimit: +process.env.DEFAULT_LIMIT || 10,
+  })
+```
+
+## env ejemplo .env.template
+para poder usarlo renombramos ya que el .env no se sube a github
+
+# base de datos a prod
+```
+https://railway.app/
+
+```
+```
+https://www.mongodb.com/
+```
+1. creamos un proyecto vacio en railway
+2. realizamos unos cambios en el codigo para nombre de la base dedatos
+3. esas modificaciones se realizaran en app.module.ts, en el MongooseModule, ponemos el nombre de la base de datos
+```javascript
+MongooseModule.forRoot(process.env.MONGODB, 
+      {dbName: 'pokemonsdb'}
+    ),
+```
+4. Corremos el seed
+```javascript
+http://localhost:3001/api/v2/seed
+```
+
+# Ejecutar el app en produccion
+
+# start:prod

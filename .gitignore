@@ -3,3 +3,4 @@
 **/*.log
 **/yarn.lock
 **/mongo/**
+*.env
