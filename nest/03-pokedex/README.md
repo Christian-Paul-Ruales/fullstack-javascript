@@ -94,5 +94,40 @@ docker compose -f docker-compose-dev.yaml up -d
 # Volviendo a mis anotaciones
 
 
+# Ejecutar el app en produccion
+DESPLEGAR EN LA NUVE...
+1. CAMBIAR EL COMANDO DE START, POR EL DE START:PROD EN EL PACKAGE.JSON
+2. configurar variables de entorno
+3. redeployar
+# start:prod
 
-    
+# DOCKERFILE
+Extension
+```
+Better DockerFile Syntax
+```
+```
+Docker
+```
+
+```
+https://gist.github.com/Klerith/e7861738c93712840ab3a38674843490
+```
+
+## ejemplo Dockerfile y docker compose
+Para correrlo es necesario ejecutar los siguientes comandos
+
+1. Creamos el archivo de produccion .env.prod
+2. Llenamos las variables de entorno
+3. Creamos la imagen como se muestra a continuacion
+__la primera ejecucion__
+```bash
+docker compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
+__para las siguientes__
+```bash
+docker compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+```
+
+__Con docker in terminal podemos acceder al contenedor__

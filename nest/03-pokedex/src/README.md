@@ -374,5 +374,9 @@ http://localhost:3001/api/v2/seed
 ```
 
 # Ejecutar el app en produccion
-
+DESPLEGAR EN LA NUVE...
+1. CAMBIAR EL COMANDO DE START, POR EL DE START:PROD EN EL PACKAGE.JSON
+2. configurar variables de entorno
+3. redeployar
 # start:prod
+aprender amazon web services
