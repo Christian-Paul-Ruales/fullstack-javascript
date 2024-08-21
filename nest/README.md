@@ -44,3 +44,6 @@ instalamos de manera global
     nest new project-name
 
 despues podemos usar el manejador de paquetes que deseamos, en este caso se recomienda usar **yarn**
+
+
+## POSTGRES CON TYPEORM 04-xxxx
