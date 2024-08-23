@@ -256,3 +256,139 @@ Construye un query con sintaxis sql
     }
  ```
 
+ ## Una nueva entidad
+
+ __recuerda que es importante importar la entidad en el modulo que te encuentres, en este caso produc.module, en el typeorm__
+ 
+```javascript
+imports: [
+    TypeOrmModule.forFeature([Product, ProductImage]),
+  ],
+})
+```
+
+## relaciones
+varios a uno
+```javascript
+@ManyToOne(
+    () => Product,
+    (product) => product.images,
+    
+  )
+  product: Product;
+```
+ 
+uno a varios
+```javascript
+@OneToMany(
+    () => ProductImage,
+    productImage => productImage.product,
+    { cascade: true} // no recomendado
+  )
+  images?: ProductImage[];
+```
+
+## guardar imagenes del producto
+recorremos las imagenes con map y las vamos procesando (create), el metodo save guardara todo
+```javascript
+const product = this.productRepository.create({...productDetails, images: images
+        .map(image => this.productImageRepository.create({url: image}))}); // recorremos las imagenes y se crean unicamente las imagenes
+      
+
+      await this.productRepository.save(product);
+```
+
+## busqueda
+find tiene una propiedad relations, donde llenas las relaciones, en este caso imagenes
+
+```javascript
+const product = this.productRepository.return await this.productRepository.find({
+      take: limit,
+      skip: offset,
+      relations: {
+        images: true
+      }
+      // TODO: relaciones
+    });
+```
+
+
+# ESTUDIAR EL EAGER RELATION
+## eager 
+permite devolver datos de la relacion, en este caso imagenes de los productos
+
+1. en la entidad productos agregamos eager: true
+
+__suficiente para find by id__
+```javascript
+@OneToMany(
+    () => ProductImage,
+    productImage => productImage.product,
+    { cascade: true,
+      eager: true,
+    } // no recomendado
+  )
+  images?: ProductImage[];
+```
+
+## Query Runner
+```
+https://orkhan.gitbook.io/typeorm/docs/insert-query-builder
+```
+
+1. creamos la inyeccion de dependencias en el constructor
+```javascript
+private readonly dataSource: DataSource,
+```
+2. usamos el query runner
+
+```javascript
+const queryRunner = this.dataSource.createQueryRunner();
+```    
+
+## Query Runner
+1. Creamos el query runner
+2. arrancamos la transaccion con startTransaction
+3. Realizamos una operacion ejemplo eliminacion, especificando el tipo y un ejemplo de busqueda
+```javascript
+await queryRunner.manager.delete( ProductImage, { product: {id: id}} );
+```
+
+__para guardar siempre es necesario procesar con create primero, esto no crea en la base de datos, solo procesa__
+
+4. si todo es correcto (try) se realiza un await queryRunner.commitTransaction();
+
+5. si algo fallo, catch await queryRunner.rollbackTransaction();
+
+6. siempre finalizando con await queryRunner.release();
+
+__ejemplo de lo anterior explicado__
+
+```javascript
+const queryRunner = this.dataSource.createQueryRunner();
+      await queryRunner.connect(); // conectar a la base
+      await queryRunner.startTransaction(); // iniciar transaccion
+
+    try {
+
+      if(images){
+        // borramos las anteriores imagenes
+        await queryRunner.manager.delete( ProductImage, { product: {id: id}} ); // elimina imagenes de ese producto
+        product.images = images.map( image => this.productImageRepository.create({url: image}));
+      } 
+      await queryRunner.manager.save(product);
+
+      await queryRunner.commitTransaction();
+      await queryRunner.release();
+      
+```
+
+## Eliminacion en cascada...
+
+__EN LA entidad hija se pone onDelete: Cascade__
+```javascript
+@ManyToOne(
+    () => Product,
+    (product) => product.images,
+    { onDelete: 'CASCADE'}
+```
